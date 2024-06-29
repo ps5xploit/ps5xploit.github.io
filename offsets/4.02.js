@@ -209,7 +209,6 @@ let syscall_map = {
     0x1BA: 0x32B70, // sys_thr_suspend
     0x1BB: 0x334A0, // sys_thr_wake
     0x1BC: 0x34510, // sys_kldunloadf
-    0x1C6: 0x32BF0, // sys__umtx_op
     0x1C6: 0x35200, // sys__umtx_op
     0x1C7: 0x34F40, // sys_thr_new
     0x1C8: 0x34EA0, // sys_sigqueue
@@ -378,6 +377,9 @@ const OFFSET_KERNEL_DATA_KQUEUE_LOW_WORD    = 0x8D2F;
 const OFFSET_KERNEL_DATA_KQUEUE_BASE_SLIDE  = 0x318D2F;
 const OFFSET_KERNEL_TEXT_KQUEUE_BASE_SLIDE  = 0xF18D2F;
 const OFFSET_KERNEL_DATA_BASE_ALLPROC       = 0x27EDCB8;
+const OFFSET_KERNEL_DATA_BASE_PS4SDK        = 0x16ABE88;
+const OFFSET_KERNEL_DATA_BASE_PS5SDK_       = 0x16ABEE8;
+const OFFSET_KERNEL_DATA_BASE_PS5SDK        = 0x6506598;
 const OFFSET_KERNEL_DATA_BASE_SECURITYFLAGS = 0x6506474;
 const OFFSET_KERNEL_DATA_BASE_TARGETID      = 0x650647D;
 const OFFSET_KERNEL_DATA_BASE_QA_FLAGS      = 0x6506498;

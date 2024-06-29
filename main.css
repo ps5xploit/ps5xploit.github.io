@@ -31,24 +31,31 @@ body {
 }
 
 .btn {
-  padding: 0.2rem 0.5rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 0.2rem 0.1rem;
-  cursor: pointer;
-  line-height: 2rem;
-  width: 200px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: black;
-  border: 2px solid #FFFF00;
-  color: #fff;
-  font-size: 16px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  outline: none; /* Elimina el contorno en el estado activo y enfocado */
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.2rem 0.1rem;
+    cursor: pointer;
+    line-height: 2rem;
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: black;
+    border: 2px solid #FFFF00;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    outline: none; /* Elimina el contorno en el estado activo y enfocado */
+    opacity: 0; /* Ocultar inicialmente los botones */
+    transform: translateY(-20px); /* Desplazarlos hacia arriba fuera de la vista */
 }
 
+/* Mostrar los botones cuando se agregan al DOM */
+.btn.show {
+    opacity: 1;
+    transform: translateY(0); /* Posición original */
+}
 .btn:hover {
   background-color: #FFFF00;
   color: #000;
@@ -71,7 +78,7 @@ body {
 
 /* Centra el último botón */
 .btn:last-child {
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 /* Para pantallas más pequeñas, muestra 2 botones en la fila */
@@ -139,6 +146,14 @@ body {
 
 .info {
     color: #a1a1a1;
+}
+#info {
+    color: #FFFF00; /* Asegúrate de que el texto sea visible */
+    font-size: 20px;
+    position: absolute;
+    top: 350px;
+    left: 50px;
+    text-align: center;
 }
 
 .grid-container {
