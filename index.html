@@ -19,7 +19,7 @@
     <script defer src="module/rw.js"></script>
     <script defer src="webkit_psfree.js"></script>
     <script defer src="webkit_fontface.js"></script>
-    <script>
+   <script>
     addEventListener('unhandledrejection', (event) => {
         const reason = event.reason;
         alert(reason);
@@ -33,12 +33,9 @@
         }
     });
 
-    function onload_setup() {
-        // Aquí se eliminó la sección relacionada con 'l2_redirector'
-    }
 
     function executarJailbreak() {
-        setTimeout(runJailbreak, 500); // 500 milissegundos
+        setTimeout(runJailbreak, 1000); // 1 seg
     }
 
     window.onload = executarJailbreak;
