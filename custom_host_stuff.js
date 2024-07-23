@@ -1,3 +1,4 @@
+
 async function runJailbreak() {
     window.jb_in_progress = true;
     window.jb_started = true;
@@ -18,10 +19,6 @@ async function runJailbreak() {
     }, 100);
 }
 
-function wk_expoit_type_changed(event) {
-    localStorage.setItem("wk_exploit_type", event.target.value);
-}
-
 function onload_setup() {
     if (document.documentElement.hasAttribute("manifest")) {
         add_cache_event_toasts();
@@ -33,14 +30,9 @@ function onload_setup() {
     let menu_overlay = document.getElementById("menu-overlay");
     let menu = document.getElementById("menu-bar-wrapper");
 
-    if (localStorage.getItem("wk_exploit_type") == null) {
-        localStorage.setItem("wk_exploit_type", "psfree");
-    }
-
-    let wk_exploit_type = localStorage.getItem("wk_exploit_type");
-    if (wk_exploit_type == "psfree") {
-        document.getElementById("wk-exploit-psfree").checked = true;
-    }
+    // Siempre establece "psfree" como el tipo de exploit
+    localStorage.setItem("wk_exploit_type", "psfree");
+    document.getElementById("wk-exploit-psfree").checked = true;
 
     let isTransitionInProgress = false;
 
@@ -90,7 +82,7 @@ function create_payload_buttons() {
         btn.id = "payload-" + i;
         btn.className = "btn mx-auto";
         btn.tabIndex = "0";
-        btn.setAttribute('data-info', payload_map[i].info); // Añadir el atributo data-info
+        btn.setAttribute('data-info', payload_map[i].info);
         btn.onclick = async () => {
             if (false) { showToast(payload_map[i].displayTitle + " added to queue.", 1000); }
             window.local_payload_queue.push(payload_map[i]);
@@ -113,15 +105,13 @@ function create_payload_buttons() {
 
         document.getElementById("payloads-list").appendChild(btn);
 
-        // Añadir eventos de mouseenter y mouseleave para mostrar el data-info
         btn.addEventListener('mouseenter', async function() {
             await log(this.getAttribute('data-info'));
         });
         btn.addEventListener('mouseleave', async function() {
-            await log(''); // Limpiar el contenido al salir
+            await log('');
         });
 
-        // Agregar la clase show después de un pequeño retraso
         setTimeout(() => {
             btn.classList.add("show");
         }, 100);
@@ -156,7 +146,6 @@ function showToast(message, timeout = 2000) {
 
     toastContainer.appendChild(toast);
 
-    // Trigger reflow and enable animation
     toast.offsetHeight;
 
     toast.classList.add('show');
