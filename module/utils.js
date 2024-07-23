@@ -26,7 +26,7 @@ function die(msg) {
     document.dispatchEvent(event);
 
     // Lanza la excepción
-    throw new Error("⚠️​ PSFree failed: " + msg + "\n🔄​ Click accept and the page will reload");
+    throw new Error("⚠️​ PSFree fail! " + msg + "\n​★ Click accept to 🔄");
 }
 
 // Función para manejar el evento de pulsación de tecla
