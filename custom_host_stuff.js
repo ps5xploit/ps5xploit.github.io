@@ -14,12 +14,7 @@ async function runJailbreak() {
 
     create_payload_buttons();
     setTimeout(async () => {
-        let wk_exploit_type = localStorage.getItem("wk_exploit_type");
-        if (wk_exploit_type == "psfree") {
-            await run_psfree();
-        } else if (wk_exploit_type == "fontface") {
-            await run_fontface();
-        }
+        await run_psfree();
     }, 100);
 }
 
@@ -45,8 +40,6 @@ function onload_setup() {
     let wk_exploit_type = localStorage.getItem("wk_exploit_type");
     if (wk_exploit_type == "psfree") {
         document.getElementById("wk-exploit-psfree").checked = true;
-    } else if (wk_exploit_type == "fontface") {
-        document.getElementById("wk-exploit-fontface").checked = true;
     }
 
     let isTransitionInProgress = false;
