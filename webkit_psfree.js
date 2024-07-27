@@ -525,7 +525,7 @@ async function run_psfree(attempt = 1) {
         debug_log(`[!] Error: ${error.message}`);
 
         if (attempt < max_attempts) {
-            debug_log(`[Retry] Attempt ${attempt + 1}`);
+           // debug_log(`[Retry] Attempt ${attempt + 1}`);
             await sleep(1000); // Espera antes de reintentar
             return run_psfree(attempt + 1);
         } else {
