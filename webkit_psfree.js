@@ -446,7 +446,7 @@ async function run_psfree(attempt = 1) {
     const max_attempts = 5; // Número máximo de intentos
 
     try {
-        debug_log(`[ PSFree - Attempt ${attempt} ]`);
+       // debug_log(`[ PSFree - Attempt ${attempt} ]`);
 
         debug_log('[ PSFree - Step 0 ]');
         await get_ready();
