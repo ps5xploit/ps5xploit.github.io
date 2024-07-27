@@ -1,6 +1,6 @@
 /* Copyright (C) 2023 anonymous
 
-This file is part of PSFree.
+This file is part of PSFree. mod by @mour0ne
 
 PSFree is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -40,8 +40,6 @@ function unhexlify(hexstr) {
     return bytes;
 }
 
-// Decorator for Int instance operations. Takes care
-// of converting arguments to Int instances if required.
 function operation(f, nargs) {
     return function () {
         if (arguments.length !== nargs)
