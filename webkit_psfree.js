@@ -494,7 +494,7 @@ async function run_psfree(attempt = 1) {
         await use_after_free(pop, s1);
 
         debug_log('[ PSFree - Step 2 ]');
-        await sleep(0);
+        await sleep(100);  // Aumenta el tiempo de espera para asegurarse de que no se quede atascado
         await double_free(s1);
 
         debug_log('[ PSFree - Step 3 ]');
@@ -564,7 +564,7 @@ async function run_psfree(attempt = 1) {
        // debug_log(`[!] Error: ${error.message}`);
         
         if (attempt < max_attempts) {
-            debug_log(`[Retry] Attempt ${attempt + 1}`);
+           // debug_log(`[Retry] Attempt ${attempt + 1}`);
             await sleep(1000);
             return run_psfree(attempt + 1);
         } else {
