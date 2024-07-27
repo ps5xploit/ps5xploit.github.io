@@ -495,7 +495,12 @@ async function run_psfree(attempt = 1) {
 
         debug_log('[ PSFree - Step 2 ]');
         await sleep(0);
-        await double_free(s1);
+
+        // Timeout mechanism for double_free
+        const doubleFreePromise = double_free(s1);
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout during double_free')), 5000)); // 5 seconds timeout
+
+        await Promise.race([doubleFreePromise, timeoutPromise]);
 
         debug_log('[ PSFree - Step 3 ]');
         await triple_free(s1, jsview, view_leak_arr, view_leak);
