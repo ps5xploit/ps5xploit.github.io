@@ -1,6 +1,7 @@
 /* Copyright (C) 2023-2024 anonymous
 
-This file is part of PSFree.
+This file is part of PSFree. 
+
 
 PSFree is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -14,6 +15,7 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+/ se mejoraron los reintentos del xploit para que no muestre error die, by @mour0ne
 
 const ps4_9_00 = 2;
 const target = ps4_9_00;
@@ -522,7 +524,7 @@ async function run_psfree(attempt = 1) {
         window.p = prim;
         run_hax();
     } catch (error) {
-        debug_log(`[!] Error: ${error.message}`);
+        // debug_log(`[!] Error: ${error.message}`);
 
         if (attempt < max_attempts) {
            // debug_log(`[Retry] Attempt ${attempt + 1}`);
