@@ -494,8 +494,17 @@ async function run_psfree(attempt = 1) {
         await use_after_free(pop, s1);
 
         debug_log('[ PSFree - Step 2 ]');
-        await sleep(100);  // Aumenta el tiempo de espera para asegurarse de que no se quede atascado
-        await double_free(s1);
+
+        // Timeout mechanism for step 2
+        const step2Promise = new Promise(async (resolve, reject) => {
+            await sleep(100);  // Sleep time for step 2
+            await double_free(s1);
+            resolve();
+        });
+
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout during step 2')), 5000)); // 5 seconds timeout
+
+        await Promise.race([step2Promise, timeoutPromise]);
 
         debug_log('[ PSFree - Step 3 ]');
         await triple_free(s1, jsview, view_leak_arr, view_leak);
