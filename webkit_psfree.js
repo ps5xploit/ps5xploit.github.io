@@ -1,7 +1,6 @@
-/* Copyright (C) 2023-2024 anonymous
+This file is part of PSFree. /* Copyright (C) 2023-2024 anonymous
 
-This file is part of PSFree. 
-se mejoraron los reintentos del xploit para que no muestre error die, by @mour0ne
+Se agregó  reintentos del xploit para que no muestre error die en psfree, & contador de segundos para el webkit. by @mour0ne
 
 PSFree is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
