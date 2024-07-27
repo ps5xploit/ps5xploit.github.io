@@ -482,9 +482,9 @@ async function get_ready() {
 }
 
 async function run_psfree(attempt = 1) {
-    const max_attempts = 3;
+    const max_attempts = 9;
 
-    debug_log(`[ PSFree - Attempt ${attempt} ]`);
+    // debug_log(`[ PSFree - Attempt ${attempt} ]`);
     
     try {
         debug_log('[ PSFree - Step 0 ]');
@@ -561,10 +561,10 @@ async function run_psfree(attempt = 1) {
         window.p = prim;
         run_hax();
     } catch (error) {
-        debug_log(`[!] Error: ${error.message}`);
+       // debug_log(`[!] Error: ${error.message}`);
         
         if (attempt < max_attempts) {
-            debug_log(`[Retry] Attempt ${attempt + 1}`);
+           // debug_log(`[Retry] Attempt ${attempt + 1}`);
             await sleep(1000);
             return run_psfree(attempt + 1);
         } else {
