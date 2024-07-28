@@ -1,12 +1,5 @@
 const payload_map = [
-  // {
-    //     displayTitle: 'ps5-welcome',
-    //     description: '',
-    //     info: 'ps5-welcome',
-    //     fileName: 'ps5-welcome.elf',
-    //     author: 'mour0ne',
-    //     version: '?'
-    // },
+
     {
         displayTitle: 'etaHEN',
         description: '',
@@ -79,7 +72,15 @@ const payload_map = [
         author: '?',
         source: '?',
         version: '1.0'
-    }
+    },
+  // {
+    //     displayTitle: 'ps5-welcome',
+    //     description: '',
+    //     info: 'ps5-welcome',
+    //     fileName: 'ps5-welcome.elf',
+    //     author: 'mour0ne',
+    //     version: '?'
+    // },
 ];
 
 
