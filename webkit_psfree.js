@@ -432,7 +432,7 @@ async function setup_arw(save, ssv_data) {
 
     for (const msg of msgs) {
         if (msg.data !== '') {
-            debug_log('[+] Webkit exploit (PSFree) (achieved arbitrary r/w)');
+           // debug_log('[+] Wk exploit (PSFree) ( r/w)');
 
             const u = new Uint8Array(msg.data);
 
@@ -509,7 +509,7 @@ async function run_psfree(attempt = 1) {
         debug_log('[ PSFree - Step 3 ]');
         await triple_free(s1, jsview, view_leak_arr, view_leak);
 
-        debug_log('[+] Webkit exploit (PSFree) succeeded');
+        // debug_log('[+] Webkit exploit (PSFree) succeeded');
 
         let prim = {
             read1(addr) {
