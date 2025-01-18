@@ -4,7 +4,7 @@ const payload_map = [
         displayTitle: 'etaHEN',
         description: '',
         info: 'etaHEN 2.0b by LM',
-        fileName: 'etaHEN-20B.bin.gz',
+        fileName: 'etaHEN-1.8b.bin',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
         version: '2.0 beta'
     },
