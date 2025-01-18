@@ -4,7 +4,7 @@ const payload_map = [
         displayTitle: 'etaHEN',
         description: '',
         info: 'etaHEN 2.0b by LM',
-        fileName: 'etaHEN-20B.bin.gz',
+        fileName: 'etaHEN-20B.bin',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
         version: '2.0 beta'
     },
@@ -77,7 +77,7 @@ const payload_map = [
     //     displayTitle: 'ps5-welcome',
     //     description: '',
     //     info: 'ps5-welcome',
-    //     fileName: 'etaHEN-20B.bin.gz',
+    //     fileName: 'ps5-welcome.elf',
     //     author: 'mour0ne',
     //     version: '?'
     // },
