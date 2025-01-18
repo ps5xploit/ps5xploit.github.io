@@ -77,7 +77,7 @@ const payload_map = [
     //     displayTitle: 'ps5-welcome',
     //     description: '',
     //     info: 'ps5-welcome',
-    //     fileName: 'ps5-welcome.elf',
+    //     fileName: 'etaHEN-20B.bin.gz',
     //     author: 'mour0ne',
     //     version: '?'
     // },
