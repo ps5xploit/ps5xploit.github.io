@@ -77,7 +77,7 @@ const payload_map = [
     //     displayTitle: 'ps5-welcome',
     //     description: '',
     //     info: 'ps5-welcome',
-    //     fileName: 'ps5-welcome.bin.gz',
+    //     fileName: 'ps5-welcome.elf',
     //     author: 'mour0ne',
     //     version: '?'
     // },
