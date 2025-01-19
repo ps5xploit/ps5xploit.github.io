@@ -1,11 +1,11 @@
 const payload_map = [
 
     {
-         displayTitle: 'etaHEN',
-        description: 'Custom HEN payload for PS5.',
-        info: 'etaHEN 20b by LightningMods',
-        fileName: 'etaHEN-20b.bin',
-        author: 'LightningMods, sleirsgoevy, ChendoChap, astrelsky, illusion',
+        displayTitle: 'etaHEN',
+        description: '',
+        info: 'etaHEN 1.8b by LM',
+        fileName: 'etaHEN-1.8b.bin.gz',
+        author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
         version: '2.0 beta'
     },
     {
