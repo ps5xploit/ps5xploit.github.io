@@ -18,7 +18,7 @@ const payload_map = [
         version: '?'
     },
     {
-        displayTitle: 'etaHEN',
+        displayTitle: 'e̶t̶a̶H̶E̶N̶',
         description: '',
         info: 'etaHEN 2.0b (Pre-release by LM)',
         fileName: 'etaHEN-20B.bin.gz',
