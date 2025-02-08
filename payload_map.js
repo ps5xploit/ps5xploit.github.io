@@ -4,7 +4,7 @@ const payload_map = [
         displayTitle: 'etaHEN',
         description: '',
         info: 'etaHEN 1.8b by LM',
-        fileName: 'etaHEN-20B.bin.gz',
+        fileName: 'etaHEN-1.8B.bin.gz',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
         version: '1.8 beta'
     },
@@ -18,14 +18,12 @@ const payload_map = [
         version: '?'
     },
     {
-        displayTitle: 'libhijacker game-patch',
+        displayTitle: 'etaHEN',
         description: '',
-        info: 'Patches supported games',
-        fileName: 'libhijacker-spawner-1.124.elf;libhijacker-daemon-1.124.elf',
-        author: 'illusion0001, astrelsky',
-        source: 'https://github.com/illusion0001/libhijacker/releases',
-        loader: 'libhijacker',
-        version: '1.124'
+        info: 'etaHEN 2.0b by LM',
+        fileName: 'etaHEN-20B.bin.gz',
+        author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
+        version: '2.0B PRE'
     },
     {
         displayTitle: 'ELF Loader',
