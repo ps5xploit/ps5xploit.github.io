@@ -92,7 +92,7 @@ function create_payload_buttons() {
                     const mensaje = "\n🟡​ Loading etaHEN 2.0B ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
-            }, 5000); // 5000 milisegundos = 5 segundos
+            }, 2000); // 2000 milisegundos = 5 segundos
 
             // Agregar el payload a la cola después de que se haya mostrado el popup
             window.local_payload_queue.push(payload_map[i]);
