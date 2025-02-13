@@ -86,9 +86,6 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Agregar el payload a la cola inmediatamente
-            window.local_payload_queue.push(payload_map[i]);
-
             // Esperar 5 segundos antes de mostrar el popup para el payload-2 (hwinfo-tornblom.elf)
             setTimeout(() => {
                 if (i === 2) { // Solo mostrar el popup para el payload-2
@@ -96,6 +93,9 @@ function create_payload_buttons() {
                     alert(mensaje); // Mostrar el popup
                 }
             }, 5000); // 5000 milisegundos = 5 segundos
+
+            // Agregar el payload a la cola después de que se haya mostrado el popup
+            window.local_payload_queue.push(payload_map[i]);
         };
 
         let btn_child = document.createElement("p");
