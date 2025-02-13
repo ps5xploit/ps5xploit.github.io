@@ -86,10 +86,10 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Esperar 5 segundos antes de mostrar el popup para el payload-2 (hwinfo-tornblom.elf)
+            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.0B)
             setTimeout(() => {
-                if (i === 2) { // Solo mostrar el popup para el payload-2
-                    const mensaje = "\n🟡​ Loading hwinfo-tornblom.elf...\n Click 🆗​ when the notification disappears 🎮 ";
+                if (i === 0) { // Solo mostrar el popup para el payload-0
+                    const mensaje = "\n🟡​ Loading etaHEN 2.0B ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
             }, 5000); // 5000 milisegundos = 5 segundos
