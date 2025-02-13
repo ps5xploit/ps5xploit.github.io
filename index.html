@@ -153,28 +153,6 @@ margin:0px;width:99.38%;height:98.7vh;border:5px solid gray;background-color:bla
             <svg><use xlink:href="#ps_circle" id="svg4" class="svg-icon" /></svg>
         </div>
     </div>
-<!-- popup etahen 2.0b by mour0ne no freeze -->
-
-<script>
-        let btnPayload0 = document.getElementById("payload-0");
-
-        // Verifica si el botón existe
-        if (btnPayload0) {
-            // Agregar un evento de clic al botón
-            btnPayload0.onclick = async () => {
-                // Aquí agregaríamos el payload a la cola si es necesario
-                window.local_payload_queue.push(payload_map[0]);
-
-                // Espera 5 segundos y luego muestra el popup solo para el payload-0 (etaHEN-20B.bin.gz)
-                setTimeout(() => {
-                    const mensaje = "\n🟡​ Loading etaHEN wait...\n Click 🆗​ when the notification disappears 🎮 ";
-                    alert(mensaje); // Mostrar el popup
-                }, 5000); // 5000 milisegundos = 5 segundos
-            };
-        }
-    </script>
-<!-- popup etahen 2.0b by mour0ne no freeze -->
-
     <div id="payloads">
         <div id="post-jb-view" class="opacity-transition" style="width: 100%;">
             <div id="payloads-list" class="grid-container">
