@@ -91,7 +91,7 @@ function create_payload_buttons() {
             // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.0B)
             setTimeout(() => {
                 if (i === 0) { // Solo mostrar el popup para el payload-0
-                    const mensaje = "\n🟡​ Loading etaHEN 2.0B ...\n Click 🆗​ when the notification disappears 🎮 ";
+                    const mensaje = "\n🟡​ Loading etaHEN 2.0b ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
             }, 2000); // 2000 milisegundos = 5 segundos
