@@ -3,6 +3,14 @@ const payload_map = [
     {
         displayTitle: 'etaHEN',
         description: '',
+        info: 'etaHEN 2.0b by LM',
+        fileName: 'etaHEN-20B.bin.gz',
+        author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
+        version: '2.0 beta'
+    },
+{
+        displayTitle: 'etaHEN 1.8b',
+        description: '',
         info: 'etaHEN 1.8b by LM',
         fileName: 'etaHEN-1.8B.bin.gz',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
@@ -16,14 +24,6 @@ const payload_map = [
         author: '?',
         source: '?',
         version: '?'
-    },
-    {
-        displayTitle: 'e̶t̶a̶H̶E̶N̶',
-        description: '',
-        info: 'etaHEN 2.0b (Pre-release by LM)',
-        fileName: 'etaHEN-20B.bin.gz',
-        author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
-        version: '2.0B PRE'
     },
     {
         displayTitle: 'ELF Loader',
