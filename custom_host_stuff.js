@@ -83,11 +83,23 @@ function create_payload_buttons() {
         btn.className = "btn mx-auto";
         btn.tabIndex = "0";
         btn.setAttribute('data-info', payload_map[i].info);
+        
+        // Evento cuando el botón es clickeado
         btn.onclick = async () => {
-            if (false) { showToast(payload_map[i].displayTitle + " added to queue.", 1000); }
+            // Agregar el payload a la cola de carga
             window.local_payload_queue.push(payload_map[i]);
+
+            // Verificar si el payload es 'hwinfo-tornblom.elf' y mostrar el popup
+            if (payload_map[i].fileName === "hwinfo-tornblom.elf") {
+                const mensaje = "\n🟡​ Loading hwinfo-tornblom.elf...\n Click 🆗​ when the notification disappears 🎮 ";
+                alert(mensaje); // Mostrar el popup inmediatamente
+            }
+
+            // Mostrar el mensaje indicando que el payload se ha añadido a la cola (solo si es necesario)
+            showToast(payload_map[i].displayTitle + " added to queue.", 1000);
         };
 
+        // Crear y agregar los elementos de texto del botón
         let btn_child = document.createElement("p");
         btn_child.className = "payload-name";
         btn_child.innerHTML = payload_map[i].displayTitle;
@@ -103,8 +115,10 @@ function create_payload_buttons() {
         btn_child3.innerHTML = "v" + payload_map[i].version + " &centerdot; " + payload_map[i].author;
         btn.appendChild(btn_child3);
 
+        // Agregar el botón a la lista de botones
         document.getElementById("payloads-list").appendChild(btn);
 
+        // Eventos para mostrar la información del payload al pasar el ratón
         btn.addEventListener('mouseenter', async function() {
             await log(this.getAttribute('data-info'));
         });
@@ -112,6 +126,7 @@ function create_payload_buttons() {
             await log('');
         });
 
+        // Añadir la clase 'show' para mostrar el botón
         setTimeout(() => {
             btn.classList.add("show");
         }, 100);
