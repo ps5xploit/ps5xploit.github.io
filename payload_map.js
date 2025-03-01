@@ -79,6 +79,14 @@ const payload_map = [
     //     author: 'mour0ne',
     //     version: '?'
     // },
+      // {
+    //     displayTitle: 'ps5debug_10b2',
+    //     description: '',
+    //     info: 'ps5debug_10b2',
+    //     fileName: 'ps5debug_10b2.elf',
+    //     author: 'goldhen',
+    //     version: '?'
+    // },
 ];
 
 
