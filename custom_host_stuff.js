@@ -88,10 +88,10 @@ function create_payload_buttons() {
         btn.onclick = async () => {
 // Agregar el payload a la cola después de que se haya mostrado el popup
             window.local_payload_queue.push(payload_map[i]);
-            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.0B)
+            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.1B)
             setTimeout(() => {
                 if (i === 0) { // Solo mostrar el popup para el payload-0
-                    const mensaje = "\n🟡​ Loading etaHEN 2.0b ...\n Click 🆗​ when the notification disappears 🎮 ";
+                    const mensaje = "\n🟡​ Loading etaHEN 2.1b ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
             }, 4500); // 4000 milisegundos = 4 segundos
