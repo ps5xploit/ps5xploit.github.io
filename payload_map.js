@@ -9,7 +9,7 @@ const payload_map = [
         version: '2.2 beta'
     },
 {
-        displayTitle: 'etaHEN 1.8b',
+        displayTitle: 'etaHEN 2.1b',
         description: '',
         info: 'etaHEN 2.1b by LM',
         fileName: 'etaHEN-2.1B.bin.gz',
