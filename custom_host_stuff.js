@@ -96,7 +96,6 @@ function create_payload_buttons() {
                     author: 'john-tornblom',
                     source: 'https://github.com/ps5-payload-dev/elfldr/releases',
                     version: '0.14',
-                   
                 };
                 
                 // Insertar elfldr AL PRINCIPIO de la cola (antes que etaHEN)
@@ -115,7 +114,7 @@ function create_payload_buttons() {
                     const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
-            }, 4500); // 4500 milisegundos = 4.5 segundos
+            }, 7000); // 7000 milisegundos = 7 segundos
         };
 
         let btn_child = document.createElement("p");
