@@ -85,8 +85,14 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Si es el payload-0 (etaHEN 2.2b)
+            // Agregar el payload a la cola
+            window.local_payload_queue.push(payload_map[i]);
+            
+            // Si es el payload-0 (etaHEN 2.2b), necesitamos cargar elfldr primero
             if (i === 0) {
+                // MOSTRAR TOAST INMEDIATO
+                showToast('★ Preparing etaHEN 2.2b...', 3000);
+                
                 // Crear payload ESPECIAL para elfldr.elf con el campo loader
                 const elfldrPayload = {
                     displayTitle: 'ELF Loader',
@@ -102,11 +108,10 @@ function create_payload_buttons() {
                 // Insertar elfldr AL PRINCIPIO de la cola (antes que etaHEN)
                 window.local_payload_queue.unshift(elfldrPayload);
                 
-                // Ahora agregar etaHEN a la cola también
-                window.local_payload_queue.push(payload_map[i]);
-            } else {
-                // Para otros payloads, agregar normalmente
-                window.local_payload_queue.push(payload_map[i]);
+                // Mostrar toast adicional
+                setTimeout(() => {
+                    showToast('★ ELF Loader loaded first...', 3000);
+                }, 1500);
             }
             
             // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.2b)
