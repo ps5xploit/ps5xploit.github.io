@@ -87,7 +87,7 @@ function create_payload_buttons() {
         btn.onclick = async () => {
             // Si es el payload-0 (etaHEN 2.2b)
             if (i === 0) {
-                // Crear payload ESPECIAL para elfldr.elf con el campo loader
+                // Crear payload ESPECIAL para elfldr.elf
                 const elfldrPayload = {
                     displayTitle: 'ELF Loader',
                     description: '',
@@ -96,25 +96,51 @@ function create_payload_buttons() {
                     author: 'john-tornblom',
                     source: 'https://github.com/ps5-payload-dev/elfldr/releases',
                     version: '0.14',
+                    loader: "john-tornblom-elfldr"  // AÑADIR ESTO para que funcione
                 };
                 
-                // Insertar elfldr AL PRINCIPIO de la cola (antes que etaHEN)
+                // Insertar elfldr AL PRINCIPIO de la cola
                 window.local_payload_queue.unshift(elfldrPayload);
                 
-                // Ahora agregar etaHEN a la cola también
-                window.local_payload_queue.push(payload_map[i]);
+                // ESPERAR 3 segundos para que elfldr se cargue
+                setTimeout(async () => {
+                    // Usar la función tcp_send_buffer_to_port que ya existe en exploit.js
+                    // para enviar etaHEN al puerto 9021
+                    if (typeof window.tcp_send_buffer_to_port === 'function') {
+                        // Obtener el payload de etaHEN
+                        const etahenPayload = payload_map[i];
+                        // Cargar el archivo etaHEN
+                        try {
+                            const response = await fetch('payloads/' + etahenPayload.fileName);
+                            const data = await response.arrayBuffer();
+                            // Enviar al puerto 9021 (localhost)
+                            await window.tcp_send_buffer_to_port("127.0.0.1", 9021, data, data.byteLength);
+                        } catch (error) {
+                            console.error("Error enviando etaHEN al puerto 9021:", error);
+                            // Fallback: cargar normalmente
+                            window.local_payload_queue.push(etahenPayload);
+                        }
+                    } else {
+                        // Fallback si no existe la función
+                        window.local_payload_queue.push(payload_map[i]);
+                    }
+                }, 3000);
+                
             } else {
                 // Para otros payloads, agregar normalmente
                 window.local_payload_queue.push(payload_map[i]);
             }
             
-            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.2b)
+            // Para etaHEN, esperar más tiempo (7 segundos)
+            // Para otros payloads, esperar menos (4.5 segundos)
+            const waitTime = i === 0 ? 7000 : 4500;
+            
             setTimeout(() => {
                 if (i === 0) { // Solo mostrar el popup para el payload-0
-                    const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
-                    alert(mensaje); // Mostrar el popup
+                    const mensaje = "\n🟡​ Loading etaHEN 2.2b via ELF Loader...\n Click 🆗​ when the notification disappears 🎮 ";
+                    alert(mensaje);
                 }
-            }, 7000); // 7000 milisegundos = 7 segundos
+            }, waitTime);
         };
 
         let btn_child = document.createElement("p");
