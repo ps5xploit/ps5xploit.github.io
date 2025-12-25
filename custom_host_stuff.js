@@ -108,7 +108,7 @@ function create_payload_buttons() {
                         // Verificar si la función para enviar al puerto existe
                         if (typeof window.tcp_send_buffer_to_port === 'function') {
                             // Cargar el archivo etaHEN desde payloads
-                            const etahenFile = 'etaHEN_2.2b.elf'; // Ajusta este nombre si es diferente
+                            const etahenFile = 'etaHEN.bin'; // Ajusta este nombre si es diferente
                             const response = await fetch('payloads/' + etahenFile);
                             if (response.ok) {
                                 const data = await response.arrayBuffer();
