@@ -85,7 +85,7 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Si es el payload-0 (etaHEN 2.2b), cargar elfldr primero con delay
+            // Si es el payload-0 (etaHEN 2.2b)
             if (i === 0) {
                 // Crear payload ESPECIAL para elfldr.elf con el campo loader
                 const elfldrPayload = {
@@ -99,24 +99,23 @@ function create_payload_buttons() {
                     loader: "john-tornblom-elfldr"  // ESTE CAMPO ES NECESARIO PARA elfldr
                 };
                 
-                // Agregar SOLO elfldr primero a la cola
-                window.local_payload_queue.push(elfldrPayload);
+                // Insertar elfldr AL PRINCIPIO de la cola (antes que etaHEN)
+                window.local_payload_queue.unshift(elfldrPayload);
                 
-                // Esperar 3 segundos para que elfldr se cargue y confirme
-                setTimeout(() => {
-                    // Ahora agregar etaHEN a la cola
-                    window.local_payload_queue.push(payload_map[i]);
-                    
-                    // Esperar 4.5 segundos más para mostrar el popup de etaHEN
-                    setTimeout(() => {
-                        const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
-                        alert(mensaje); // Mostrar el popup
-                    }, 4500);
-                }, 3000); // 3000ms = 3 segundos de espera para elfldr
+                // Ahora agregar etaHEN a la cola también
+                window.local_payload_queue.push(payload_map[i]);
             } else {
                 // Para otros payloads, agregar normalmente
                 window.local_payload_queue.push(payload_map[i]);
             }
+            
+            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.2b)
+            setTimeout(() => {
+                if (i === 0) { // Solo mostrar el popup para el payload-0
+                    const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
+                    alert(mensaje); // Mostrar el popup
+                }
+            }, 4500); // 4500 milisegundos = 4.5 segundos
         };
 
         let btn_child = document.createElement("p");
