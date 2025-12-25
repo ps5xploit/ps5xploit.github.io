@@ -96,7 +96,7 @@ function create_payload_buttons() {
                     author: 'john-tornblom',
                     source: 'https://github.com/ps5-payload-dev/elfldr/releases',
                     version: '0.14',
-                    loader: "john-tornblom-elfldr"  // ¡¡¡ESTE SÍ ES NECESARIO!!!
+                    
                 };
                 
                 // Insertar elfldr AL PRINCIPIO de la cola
