@@ -122,7 +122,7 @@ function create_payload_buttons() {
             // Esperar antes de mostrar el popup
             setTimeout(() => {
                 if (i === 0) { // Solo mostrar el popup para el payload-0
-                    const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
+                    const mensaje = "\n🟡​ Loading etaHEN 2.5b ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
                 }
             }, 7000); // 7000 milisegundos = 7 segundos

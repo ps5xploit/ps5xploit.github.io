@@ -3,10 +3,10 @@ const payload_map = [
     {
         displayTitle: 'etaHEN',
         description: '',
-        info: 'etaHEN 2.2b by LM',
+        info: 'etaHEN 2.5b by LM',
         fileName: 'etaHEN.bin',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
-        version: '2.2 beta'
+        version: '2.5 beta'
     },
 {
         displayTitle: 'etaHEN 2.1b',
