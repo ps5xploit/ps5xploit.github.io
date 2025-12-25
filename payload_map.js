@@ -33,6 +33,7 @@ const payload_map = [
         author: 'john-tornblom',
         source:'https://github.com/ps5-payload-dev/elfldr/releases',
         version: '0.14'
+loader: 'john-tornblom-elfldr'  // Añadir aquí también
     },
     {
         displayTitle: 'Web SRV',
