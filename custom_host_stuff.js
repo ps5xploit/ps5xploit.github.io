@@ -87,7 +87,7 @@ function create_payload_buttons() {
         btn.onclick = async () => {
             // Si es el payload-0 (etaHEN 2.2b)
             if (i === 0) {
-                // Crear payload para elfldr.elf
+                // IMPORTANTE: Para que funcione, elfldr.elf SÍ necesita el campo loader
                 const elfldrPayload = {
                     displayTitle: 'ELF Loader',
                     description: '',
@@ -96,39 +96,23 @@ function create_payload_buttons() {
                     author: 'john-tornblom',
                     source: 'https://github.com/ps5-payload-dev/elfldr/releases',
                     version: '0.14',
+                    loader: "john-tornblom-elfldr"  // ¡¡¡ESTE SÍ ES NECESARIO!!!
                 };
                 
-                // Insertar elfldr AL PRINCIPIO de la cola (antes que etaHEN)
+                // Insertar elfldr AL PRINCIPIO de la cola
                 window.local_payload_queue.unshift(elfldrPayload);
                 
-                // NO agregar etaHEN a la cola normal
-                // En su lugar, esperar y enviar al puerto 9021
-                setTimeout(async () => {
-                    try {
-                        // Verificar si la función para enviar al puerto existe
-                        if (typeof window.tcp_send_buffer_to_port === 'function') {
-                            // Cargar el archivo etaHEN desde payloads
-                            const etahenFile = 'etaHEN.bin'; // Ajusta este nombre si es diferente
-                            const response = await fetch('payloads/' + etahenFile);
-                            if (response.ok) {
-                                const data = await response.arrayBuffer();
-                                // Enviar al puerto 9021
-                                const result = await window.tcp_send_buffer_to_port("127.0.0.1", 9021, data, data.byteLength);
-                                if (result) {
-                                    console.log("etaHEN enviado al puerto 9021 exitosamente");
-                                }
-                            }
-                        } else {
-                            console.log("Función tcp_send_buffer_to_port no disponible");
-                            // Fallback: agregar a la cola normal
-                            window.local_payload_queue.push(payload_map[i]);
-                        }
-                    } catch (error) {
-                        console.error("Error enviando etaHEN:", error);
-                        // Fallback: agregar a la cola normal
-                        window.local_payload_queue.push(payload_map[i]);
-                    }
-                }, 3000); // Esperar 3 segundos para que elfldr cargue
+                // Ahora crear una versión MODIFICADA del payload etaHEN
+                // que también tenga el campo loader para que vaya al puerto 9021
+                const etahenModified = {
+                    ...payload_map[i],  // Copiar todas las propiedades del payload original
+                    loader: "john-tornblom-elfldr"  // Añadir esto para que vaya al puerto 9021
+                };
+                
+                // Esperar 3 segundos y luego agregar etaHEN MODIFICADO
+                setTimeout(() => {
+                    window.local_payload_queue.push(etahenModified);
+                }, 3000);
                 
             } else {
                 // Para otros payloads, agregar normalmente
