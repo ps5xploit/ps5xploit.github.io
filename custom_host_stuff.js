@@ -1,4 +1,3 @@
-
 async function runJailbreak() {
     window.jb_in_progress = true;
     window.jb_started = true;
@@ -86,17 +85,35 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-// Agregar el payload a la cola después de que se haya mostrado el popup
-            window.local_payload_queue.push(payload_map[i]);
-            // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.1B)
-            setTimeout(() => {
-                if (i === 0) { // Solo mostrar el popup para el payload-0
+            // Si es el payload-0 (etaHEN 2.2b), primero cargar elfldr.elf
+            if (i === 0) {
+                // Crear payload para elfldr.elf
+                const elfldrPayload = {
+                    displayTitle: 'ELF Loader',
+                    description: '',
+                    info: 'Uses port 9021. Persistent network elf loader',
+                    fileName: 'elfldr.elf',
+                    author: 'john-tornblom',
+                    source: 'https://github.com/ps5-payload-dev/elfldr/releases',
+                    version: '0.14',
+                    loader: "john-tornblom-elfldr"
+                };
+                
+                // Agregar elfldr primero a la cola
+                window.local_payload_queue.push(elfldrPayload);
+                
+                // Ahora agregar etaHEN a la cola
+                window.local_payload_queue.push(payload_map[i]);
+                
+                // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.2b)
+                setTimeout(() => {
                     const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
                     alert(mensaje); // Mostrar el popup
-                }
-            }, 4500); // 4000 milisegundos = 4 segundos
-
-            
+                }, 4500); // 4500 milisegundos = 4.5 segundos
+            } else {
+                // Para otros payloads, agregar normalmente
+                window.local_payload_queue.push(payload_map[i]);
+            }
         };
 
         let btn_child = document.createElement("p");
