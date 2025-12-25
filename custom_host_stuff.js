@@ -85,31 +85,41 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Si es el payload-0 (etaHEN 2.2b), primero cargar elfldr.elf
+            // Si es el payload-0 (etaHEN 2.2b), primero buscar y cargar elfldr.elf si existe
             if (i === 0) {
-                // Crear payload para elfldr.elf
-                const elfldrPayload = {
-                    displayTitle: 'ELF Loader',
-                    description: '',
-                    info: 'Uses port 9021. Persistent network elf loader',
-                    fileName: 'elfldr.elf',
-                    author: 'john-tornblom',
-                    source: 'https://github.com/ps5-payload-dev/elfldr/releases',
-                    version: '0.14',
-                    loader: "john-tornblom-elfldr"
-                };
+                // Buscar si elfldr.elf existe en el payload_map
+                let elfldrIndex = -1;
+                for (let j = 0; j < payload_map.length; j++) {
+                    if (payload_map[j].fileName === 'elfldr.elf') {
+                        elfldrIndex = j;
+                        break;
+                    }
+                }
                 
-                // Agregar elfldr primero a la cola
-                window.local_payload_queue.push(elfldrPayload);
-                
-                // Ahora agregar etaHEN a la cola
-                window.local_payload_queue.push(payload_map[i]);
-                
-                // Esperar 5 segundos antes de mostrar el popup para el payload-0 (etaHEN 2.2b)
-                setTimeout(() => {
-                    const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
-                    alert(mensaje); // Mostrar el popup
-                }, 4500); // 4500 milisegundos = 4.5 segundos
+                // Si encontramos elfldr en el payload_map, cargarlo primero
+                if (elfldrIndex !== -1) {
+                    window.local_payload_queue.push(payload_map[elfldrIndex]);
+                    showToast('★ Loading ELF Loader first...', 3000);
+                    
+                    // Esperar 2 segundos antes de cargar etaHEN
+                    setTimeout(() => {
+                        window.local_payload_queue.push(payload_map[i]);
+                        showToast('★ Now loading etaHEN 2.2b...', 3000);
+                        
+                        // Esperar 4.5 segundos antes de mostrar el popup
+                        setTimeout(() => {
+                            const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
+                            alert(mensaje);
+                        }, 4500);
+                    }, 2000);
+                } else {
+                    // Si no encontramos elfldr, cargar solo etaHEN normalmente
+                    window.local_payload_queue.push(payload_map[i]);
+                    setTimeout(() => {
+                        const mensaje = "\n🟡​ Loading etaHEN 2.2b ...\n Click 🆗​ when the notification disappears 🎮 ";
+                        alert(mensaje);
+                    }, 4500);
+                }
             } else {
                 // Para otros payloads, agregar normalmente
                 window.local_payload_queue.push(payload_map[i]);
