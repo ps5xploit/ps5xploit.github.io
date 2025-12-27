@@ -85,9 +85,9 @@ function create_payload_buttons() {
 
         // Función que se ejecuta cuando se hace clic en el botón
         btn.onclick = async () => {
-            // Si es el payload-0 (etaHEN 2.2b)
-            if (i === 0) {
-                // IMPORTANTE: Para que funcione, elfldr.elf SÍ necesita el campo loader
+            // Si es el payload-0 (etaHEN 2.5b) O el payload-1 (etaHEN 2.2B)
+            if (i === 0 || i === 1) {
+                // Crear payload para elfldr.elf
                 const elfldrPayload = {
                     displayTitle: 'ELF Loader',
                     description: '',
@@ -96,14 +96,13 @@ function create_payload_buttons() {
                     author: 'john-tornblom',
                     source: 'https://github.com/ps5-payload-dev/elfldr/releases',
                     version: '0.14',
-                    
                 };
                 
                 // Insertar elfldr AL PRINCIPIO de la cola
                 window.local_payload_queue.unshift(elfldrPayload);
                 
-                // Ahora crear una versión MODIFICADA del payload etaHEN
-                // que también tenga el campo loader para que vaya al puerto 9021
+                // Crear una versión MODIFICADA del payload etaHEN
+                // que tenga el campo loader para que vaya al puerto 9021
                 const etahenModified = {
                     ...payload_map[i],  // Copiar todas las propiedades del payload original
                     loader: "john-tornblom-elfldr"  // Añadir esto para que vaya al puerto 9021
@@ -121,9 +120,12 @@ function create_payload_buttons() {
             
             // Esperar antes de mostrar el popup
             setTimeout(() => {
-                if (i === 0) { // Solo mostrar el popup para el payload-0
+                if (i === 0) { // Popup para el payload-0 (etaHEN 2.5b)
                     const mensaje = "\n🟡​ Loading etaHEN 2.5b ...\n Click 🆗​ when the notification disappears 🎮 ";
-                    alert(mensaje); // Mostrar el popup
+                    alert(mensaje);
+                } else if (i === 1) { // Popup para el payload-1 (etaHEN 2.2B)
+                    const mensaje = "\n🟡​ Loading etaHEN 2.2B ...\n Click 🆗​ when the notification disappears 🎮 ";
+                    alert(mensaje);
                 }
             }, 7000); // 7000 milisegundos = 7 segundos
         };
