@@ -12,7 +12,7 @@ const payload_map = [
         displayTitle: 'etaHEN 2.2b',
         description: '',
         info: 'etaHEN 2.2b by LM',
-        fileName: 'etaHEN-22B.bin.gz',
+        fileName: 'etaHEN-2.2B.bin',
         author: 'LightningMods_, sleirsgoevy, ChendoChap, astrelsky, illusion',
         version: '2.2 beta'
     },
